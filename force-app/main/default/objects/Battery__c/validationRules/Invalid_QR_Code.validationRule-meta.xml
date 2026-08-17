@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Invalid_QR_Code</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(ISBLANK(QR_Code__c),NOT(REGEX(QR_Code__c, &quot;BAT[0-9]{10}&quot;)))</errorConditionFormula>
+    <errorDisplayField>QR_Code__c</errorDisplayField>
+    <errorMessage>Invalid QR Code format. Please enter a valid QR Code.</errorMessage>
+</ValidationRule>
