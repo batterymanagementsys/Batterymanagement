@@ -1,1 +1,3 @@
-public class BatteryProductionException extends Exception {}
+public class BatteryProductionException extends Exception {
+
+}
