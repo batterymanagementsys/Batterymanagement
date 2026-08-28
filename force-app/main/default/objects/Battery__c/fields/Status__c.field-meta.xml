@@ -22,9 +22,9 @@
                 <label>In Transit</label>
             </value>
             <value>
-                <fullName>Received</fullName>
+                <fullName>Warehouse_Received</fullName>
                 <default>false</default>
-                <label>Received</label>
+                <label>Warehouse Received</label>
             </value>
             <value>
                 <fullName>In Warehouse</fullName>
