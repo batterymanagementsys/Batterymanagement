@@ -1,0 +1,34 @@
+<template>
+
+    <lightning-card title="Battery Movement History">
+
+        <template if:true={errorMessage}>
+
+            <div class="slds-p-around_medium">
+                {errorMessage}
+            </div>
+
+        </template>
+
+        <template if:true={transactions.length}>
+
+            <lightning-datatable
+                key-field="Id"
+                data={transactions}
+                columns={columns}
+                hide-checkbox-column>
+            </lightning-datatable>
+
+        </template>
+
+        <template if:false={transactions.length}>
+
+            <div class="slds-p-around_medium">
+                No movement history found.
+            </div>
+
+        </template>
+
+    </lightning-card>
+
+</template>
