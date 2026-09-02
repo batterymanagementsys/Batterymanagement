@@ -3,7 +3,8 @@ public with sharing class BatteryInwardController {
     // GET OR CREATE INWARD SESSION
 
     @AuraEnabled
-    public static InwardSessionResponse getOrCreateInwardSession() {
+    public static InwardSessionResponse getOrCreateInwardSession() 
+    {
 
         InwardSessionResponse response = new InwardSessionResponse();
 
@@ -92,8 +93,8 @@ public with sharing class BatteryInwardController {
     @AuraEnabled
     public static BatteryScanResponse processBatteryInward(
         String qrCode,
-        Id sessionId
-    ) {
+        Id sessionId) 
+    {
 
         BatteryScanResponse response = new BatteryScanResponse();
 
@@ -336,6 +337,8 @@ public with sharing class BatteryInwardController {
             battery.Inventory_Status__c =
                 'Available';
 
+            battery.FIFO_Eligible__c = true;
+
             battery.Last_Movement_Date_Time__c =
                 System.now();
 
@@ -464,9 +467,14 @@ public with sharing class BatteryInwardController {
 
         List<Inward_Session__c> sessions = [
             SELECT Id,
+                   Name,
                    Status__c,
                    Started_By__c,
-                   End_Date_Time__c
+                   End_Date_Time__c,
+                   Total_Accepted__c,
+                   Total_Duplicate__c,
+                   Total_Rejected__c,
+                   Total_Scanned__c
             FROM Inward_Session__c
             WHERE Id = :sessionId
             AND Started_By__c = :UserInfo.getUserId()
@@ -484,9 +492,38 @@ public with sharing class BatteryInwardController {
 
 
         Inward_Session__c session = sessions[0];
+        List<Battery_Inward__c> inwardRecords = [SELECT Id,Verification_Status__c
+                                                FROM Battery_Inward__c
+                                                WHERE Inward_Session__c = :sessionId];
 
+        Integer acceptedCount = 0;
+        Integer rejectedCount = 0;
+        Integer duplicateCount = 0;
+        for (Battery_Inward__c inward : inwardRecords) 
+        {
+
+            if (inward.Verification_Status__c == 'Accepted') {
+                acceptedCount++;
+            }
+            else if (inward.Verification_Status__c == 'Rejected') {
+                rejectedCount++;
+            }
+            else if (inward.Verification_Status__c == 'Duplicate') {
+                duplicateCount++;
+            }
+        }
+
+        Integer totalScanned = inwardRecords.size();
+
+        session.Total_Scanned__c = totalScanned;
+        session.Total_Accepted__c = acceptedCount;
+        session.Total_Rejected__c = rejectedCount;
+        session.Total_Duplicate__c = duplicateCount;
         session.Status__c = 'Completed';
         session.End_Date_Time__c = System.now();
+
+        // Generate acknowledgement reference
+        session.Acknowledgment__c = 'ACK-' + session.Name;
 
         update session;
 
