@@ -66,12 +66,12 @@ private class BatteryMovementHistoryControllerTest {
             LIMIT 1
         ];
 
-        Test.startTest();
+        System.Test.startTest();
 
         List<Inventory_Transaction__c> results =
             BatteryMovementHistoryController.getMovementHistory(battery.Id);
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             2,
@@ -101,12 +101,12 @@ private class BatteryMovementHistoryControllerTest {
 
         Battery__c newBattery = createBattery('002');
 
-        Test.startTest();
+        System.Test.startTest();
 
         List<Inventory_Transaction__c> results =
             BatteryMovementHistoryController.getMovementHistory(newBattery.Id);
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             0,
@@ -124,7 +124,7 @@ private class BatteryMovementHistoryControllerTest {
 
         Boolean exceptionThrown = false;
 
-        Test.startTest();
+        System.Test.startTest();
 
         try {
 
@@ -135,7 +135,7 @@ private class BatteryMovementHistoryControllerTest {
             exceptionThrown = true;
         }
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             true,
