@@ -48,7 +48,7 @@ private class InwardAcknowledgementControllerTest {
 
         Boolean exceptionThrown = false;
 
-        Test.startTest();
+        System.Test.startTest();
 
         try {
             InwardAcknowledgementController.getAcknowledgement(null);
@@ -57,7 +57,7 @@ private class InwardAcknowledgementControllerTest {
             exceptionThrown = true;
         }
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             true,
@@ -90,7 +90,7 @@ private class InwardAcknowledgementControllerTest {
 
         Boolean exceptionThrown = false;
 
-        Test.startTest();
+        System.Test.startTest();
 
         try {
             InwardAcknowledgementController.getAcknowledgement(session.Id);
@@ -99,7 +99,7 @@ private class InwardAcknowledgementControllerTest {
             exceptionThrown = true;
         }
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             true,
@@ -199,12 +199,12 @@ private class InwardAcknowledgementControllerTest {
         // ------------------------------
         // Call Controller
         // ------------------------------
-        Test.startTest();
+        System.Test.startTest();
 
         InwardAcknowledgementController.AcknowledgementWrapper result =
             InwardAcknowledgementController.getAcknowledgement(session.Id);
 
-        Test.stopTest();
+        System.Test.stopTest();
 
 
         // ------------------------------
@@ -319,12 +319,12 @@ private class InwardAcknowledgementControllerTest {
 
         insert session;
 
-        Test.startTest();
+        System.Test.startTest();
 
         InwardAcknowledgementController.AcknowledgementWrapper result =
             InwardAcknowledgementController.getAcknowledgement(session.Id);
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             0,
