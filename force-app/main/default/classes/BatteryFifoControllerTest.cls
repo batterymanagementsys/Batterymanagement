@@ -71,7 +71,7 @@ private class BatteryFifoControllerTest {
             false
         );
 
-        Test.startTest();
+        System.Test.startTest();
 
         List<Battery__c> results =
             BatteryFifoController.getFifoStock(
@@ -79,7 +79,7 @@ private class BatteryFifoControllerTest {
                 null
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             2,
@@ -136,7 +136,7 @@ private class BatteryFifoControllerTest {
             true
         );
 
-        Test.startTest();
+        System.Test.startTest();
 
         List<Battery__c> results =
             BatteryFifoController.getFifoStock(
@@ -144,7 +144,7 @@ private class BatteryFifoControllerTest {
                 'BATCH-A'
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             1,
@@ -178,7 +178,7 @@ private class BatteryFifoControllerTest {
             true
         );
 
-        Test.startTest();
+        System.Test.startTest();
 
         List<Battery__c> results =
             BatteryFifoController.getFifoStock(
@@ -186,7 +186,7 @@ private class BatteryFifoControllerTest {
                 'BATCH-NOT-EXIST'
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             0,
@@ -210,7 +210,7 @@ private class BatteryFifoControllerTest {
             true
         );
 
-        Test.startTest();
+        System.Test.startTest();
 
         List<Battery__c> results =
             BatteryFifoController.getFifoStock(
@@ -218,7 +218,7 @@ private class BatteryFifoControllerTest {
                 ''
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             1,
@@ -242,7 +242,7 @@ private class BatteryFifoControllerTest {
             true
         );
 
-        Test.startTest();
+        System.Test.startTest();
 
         List<Battery__c> results =
             BatteryFifoController.getFifoStock(
@@ -250,7 +250,7 @@ private class BatteryFifoControllerTest {
                 'BATCH-WH'
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             1,
