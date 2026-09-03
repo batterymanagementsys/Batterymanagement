@@ -1,0 +1,162 @@
+.session-info {
+    padding: 12px;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.session-info p {
+    margin: 4px 0;
+}
+
+.scan-section {
+    width: 100%;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.camera-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px;
+    border: 1px solid #dddbda;
+    border-radius: 6px;
+    background: #f3f3f3;
+    text-align: center;
+}
+
+.camera-container video {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+    background: #000000;
+}
+
+.scanner-canvas {
+    display: none;
+}
+
+.camera-message {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #444444;
+}
+
+.result-section {
+    margin-top: 16px;
+    padding: 12px;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+}
+
+.result-section h2 {
+    margin-bottom: 6px;
+}
+
+.result-success {
+    border-left: 4px solid #2e844a;
+    background: #f3fff6;
+}
+
+.result-warning {
+    border-left: 4px solid #fe9339;
+    background: #fff8f2;
+}
+
+.result-error {
+    border-left: 4px solid #ba0517;
+    background: #fff5f5;
+}
+
+.battery-details {
+    padding: 14px;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.battery-details h2 {
+    margin-bottom: 12px;
+}
+
+.detail-row {
+    display: flex;
+    gap: 8px;
+    margin: 7px 0;
+}
+
+.detail-row strong {
+    min-width: 120px;
+}
+
+.summary-section {
+    padding-top: 16px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.summary-box {
+    padding: 12px;
+    border: 1px solid #dddbda;
+    border-radius: 4px;
+    text-align: center;
+    background: #ffffff;
+}
+
+.summary-box span {
+    display: block;
+    font-size: 0.8rem;
+}
+
+.summary-box strong {
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 4px;
+}
+
+.complete-session {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .detail-row strong {
+        min-width: auto;
+    }
+
+    .camera-container {
+        padding: 8px;
+    }
+}

@@ -1,0 +1,89 @@
+<template>
+
+    <lightning-card title="FIFO Eligible Stock">
+
+        <div class="slds-p-around_medium">
+
+            <lightning-layout
+                multiple-rows
+                vertical-align="end">
+
+                <lightning-layout-item
+                    size="12"
+                    medium-device-size="6"
+                    padding="around-small">
+
+                    <lightning-input
+                        label="Batch Number"
+                        value={batchNumber}
+                        onchange={handleBatchChange}>
+                    </lightning-input>
+
+                </lightning-layout-item>
+
+                <lightning-layout-item
+                    size="12"
+                    medium-device-size="3"
+                    padding="around-small">
+
+                    <lightning-button
+                        label="Search"
+                        variant="brand"
+                        onclick={handleSearch}>
+                    </lightning-button>
+
+                </lightning-layout-item>
+
+                <lightning-layout-item
+                    size="12"
+                    medium-device-size="3"
+                    padding="around-small">
+
+                    <lightning-button
+                        label="Clear"
+                        onclick={handleClear}>
+                    </lightning-button>
+
+                </lightning-layout-item>
+
+            </lightning-layout>
+
+        </div>
+
+
+        <template if:true={isLoading}>
+
+            <lightning-spinner
+                alternative-text="Loading FIFO Stock">
+            </lightning-spinner>
+
+        </template>
+
+
+        <template if:true={errorMessage}>
+
+            <div class="slds-p-horizontal_medium
+                        slds-p-bottom_medium
+                        slds-text-color_error">
+
+                {errorMessage}
+
+            </div>
+
+        </template>
+
+
+        <template if:true={hasBatteries}>
+
+    <lightning-datatable
+        key-field="Id"
+        data={batteries}
+        columns={columns}
+        hide-checkbox-column>
+    </lightning-datatable>
+
+</template>
+
+    </lightning-card>
+
+</template>

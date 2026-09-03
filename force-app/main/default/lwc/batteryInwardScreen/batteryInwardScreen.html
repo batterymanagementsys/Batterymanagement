@@ -1,0 +1,253 @@
+<template>
+    <lightning-card
+        title="Battery Inward"
+        icon-name="standard:product">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Loading -->
+            <template if:true={isLoading}>
+                <lightning-spinner
+                    alternative-text="Loading inward session">
+                </lightning-spinner>
+            </template>
+
+            <!-- Error -->
+            <template if:true={errorMessage}>
+                <div
+                    class="slds-notify slds-notify_alert slds-alert_error"
+                    role="alert">
+
+                    <span>{errorMessage}</span>
+
+                </div>
+            </template>
+
+            <!-- Warehouse and Session -->
+            <div class="session-info">
+
+                <p>
+                    <strong>Warehouse:</strong>
+                    {warehouseName}
+                </p>
+
+                <p>
+                    <strong>Session:</strong>
+                    {sessionNumber}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {sessionStatus}
+                </p>
+
+            </div>
+
+            <!-- QR Scan Section -->
+            <div class="scan-section slds-m-top_medium">
+
+                <lightning-input
+                    data-id="qrInput"
+                    type="text"
+                    label="Battery QR Code"
+                    placeholder="Enter QR code manually"
+                    value={qrCode}
+                    onchange={handleQrChange}
+                    onkeydown={handleKeyDown}>
+                </lightning-input>
+
+                <div class="button-row">
+
+                    <lightning-button
+                        variant="brand"
+                        label="Manual"
+                        onclick={handleScan}
+                        disabled={isScanning}>
+                    </lightning-button>
+
+                    <lightning-button
+                        variant="brand"
+                        label="Scan"
+                        icon-name="utility:scan"
+                        onclick={startCamera}
+                        disabled={isScanning}>
+                    </lightning-button>
+
+                    <template if:true={showCamera}>
+
+                        <lightning-button
+                            variant="neutral"
+                            label="Stop Camera"
+                            onclick={stopCamera}>
+                        </lightning-button>
+
+                    </template>
+
+                </div>
+
+            </div>
+
+            <!-- Camera -->
+            <template if:true={showCamera}>
+
+                <div class="camera-container slds-m-top_medium">
+
+                    <video
+                        data-id="camera"
+                        autoplay
+                        muted
+                        playsinline>
+                    </video>
+
+                    <canvas
+                        data-id="canvas"
+                        class="scanner-canvas">
+                    </canvas>
+
+                    <div class="camera-message">
+                        Point the camera at the battery QR code.
+                    </div>
+
+                </div>
+
+            </template>
+
+            <!-- Scan Result -->
+            <template if:true={showResult}>
+
+                <div class={resultClass}>
+
+                    <h2 class="slds-text-heading_small">
+                        Scan Result
+                    </h2>
+
+                    <p>
+                        {resultMessage}
+                    </p>
+
+                    <!-- Battery Record Link -->
+                    <template if:true={showBatteryRecordLink}>
+
+                        <div class="battery-link slds-m-top_small">
+
+                            <strong>Battery Record:</strong>
+
+                            <a
+                                href={batteryRecordUrl}
+                                target="_blank"
+                                rel="noopener noreferrer">
+
+                                {batteryPin}
+
+                            </a>
+
+                        </div>
+
+                    </template>
+
+                </div>
+
+            </template>
+
+            <!-- Battery Details -->
+            <template if:true={showBatteryDetails}>
+
+                <div class="battery-details slds-m-top_medium">
+
+                    <h2 class="slds-text-heading_small">
+                        Battery Details
+                    </h2>
+
+                    <p>
+                        <strong>PIN:</strong>
+                        {batteryPin}
+                    </p>
+
+                    <p>
+                        <strong>Serial Number:</strong>
+                        {serialNumber}
+                    </p>
+
+                    <p>
+                        <strong>Battery Model:</strong>
+                        {batteryModel}
+                    </p>
+
+                    <p>
+                        <strong>Batch Number:</strong>
+                        {batchNumber}
+                    </p>
+
+                </div>
+
+            </template>
+
+            <!-- Session Summary -->
+            <div class="summary-section slds-m-top_large">
+
+                <h2 class="slds-text-heading_small">
+                    Session Summary
+                </h2>
+
+                <div class="summary-grid">
+
+                    <div class="summary-box">
+
+                        <span>Total Scanned</span>
+
+                        <strong>
+                            {totalScanned}
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-box">
+
+                        <span>Accepted</span>
+
+                        <strong>
+                            {totalAccepted}
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-box">
+
+                        <span>Rejected</span>
+
+                        <strong>
+                            {totalRejected}
+                        </strong>
+
+                    </div>
+
+                    <div class="summary-box">
+
+                        <span>Duplicate</span>
+
+                        <strong>
+                            {totalDuplicate}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Complete Session -->
+            <div class="complete-session slds-m-top_large">
+
+                <lightning-button
+                    label="Complete Session"
+                    variant="brand"
+                    onclick={handleCompleteSession}
+                    disabled={isLoading}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </lightning-card>
+</template>
