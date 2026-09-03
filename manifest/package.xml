@@ -17,6 +17,15 @@
         <name>ApexTestSuite</name>
     </types>
     <types>
+    <!-- 1. The Folder Member -->
+    <members>InventoryManagementReports</members>
+
+    <!-- 2. The Reports inside the Folder -->
+    <members>InventoryManagementReports/REP_Inventory_by_Batch_GvV1</members>
+    <members>InventoryManagementReports/REP_Total_Batteries_khp</members>
+    <name>Report</name>
+</types>
+    <types>
         <members>*</members>
         <name>ApexTrigger</name>
     </types>

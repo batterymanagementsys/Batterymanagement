@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Battery__c.Battery_PIN__c</field>
+    </columns>
+    <columns>
+        <field>Battery__c.QR_Code__c</field>
+    </columns>
+    <columns>
+        <field>Battery__c.Serial_Number__c</field>
+    </columns>
+    <columns>
+        <field>Battery__c.Batch_Number__c</field>
+    </columns>
+    <columns>
+        <field>Battery__c.Status__c</field>
+    </columns>
+    <columns>
+        <field>Battery__c.Inventory_Status__c</field>
+    </columns>
+    <columns>
+        <field>Battery__c.Current_Location__c</field>
+    </columns>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CUST_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Total Batteries</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Battery__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>false</showSubTotals>
+    <sortColumn>Battery__c.Current_Location__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Battery__c.Last_Movement_Date_Time__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
