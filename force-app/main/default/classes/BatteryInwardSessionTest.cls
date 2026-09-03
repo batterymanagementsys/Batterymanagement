@@ -3,26 +3,22 @@ private class BatteryInwardSessionTest {
 
     @TestSetup
     static void setupTestData() {
-
         Warehouse__c warehouse = new Warehouse__c(
             Warehouse_Code__c = 'WH-TEST-001',
             Name = 'Session Test Warehouse',
             Active__c = true
         );
-
         insert warehouse;
     }
 
-
     @IsTest
     static void testCreateInwardSession() {
-
-        Test.startTest();
+        System.Test.startTest();
 
         BatteryInwardController.InwardSessionResponse response =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertNotEquals(
             null,
@@ -61,19 +57,17 @@ private class BatteryInwardSessionTest {
         );
     }
 
-
     @IsTest
     static void testReuseExistingActiveSession() {
-
         BatteryInwardController.InwardSessionResponse firstResponse =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.startTest();
+        System.Test.startTest();
 
         BatteryInwardController.InwardSessionResponse secondResponse =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             firstResponse.sessionId,
@@ -106,21 +100,19 @@ private class BatteryInwardSessionTest {
         );
     }
 
-
     @IsTest
     static void testCompleteInwardSession() {
-
         BatteryInwardController.InwardSessionResponse response =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.startTest();
+        System.Test.startTest();
 
         String result =
             BatteryInwardController.completeInwardSession(
                 response.sessionId
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             'Inward session completed successfully.',
@@ -150,23 +142,18 @@ private class BatteryInwardSessionTest {
         );
     }
 
-
     @IsTest
     static void testCompleteSessionWithNullId() {
-
-        Test.startTest();
+        System.Test.startTest();
 
         try {
-
             BatteryInwardController.completeInwardSession(null);
 
             System.assert(
                 false,
                 'An exception should be thrown when session Id is null.'
             );
-
         } catch (AuraHandledException ex) {
-
             System.assert(
                 ex.getMessage().contains(
                     'An inward session is required.'
@@ -175,6 +162,6 @@ private class BatteryInwardSessionTest {
             );
         }
 
-        Test.stopTest();
+        System.Test.stopTest();
     }
 }
