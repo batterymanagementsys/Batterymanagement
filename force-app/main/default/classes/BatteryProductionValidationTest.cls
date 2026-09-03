@@ -3,15 +3,12 @@ private class BatteryProductionValidationTest {
 
     @TestSetup
     static void setupTestData() {
-
         Warehouse__c warehouse = new Warehouse__c(
             Name = 'Validation Test Warehouse',
             Warehouse_Code__c = 'WH-TEST-001',
             Active__c = true
         );
-
         insert warehouse;
-
 
         Battery__c producedBattery = new Battery__c(
             Battery_PIN__c = 'BAT-VALIDATION-001',
@@ -24,9 +21,7 @@ private class BatteryProductionValidationTest {
             Production_Request_ID__c = 'PR-VALIDATION-001',
             Status__c = 'Produced'
         );
-
         insert producedBattery;
-
 
         Battery__c invalidStatusBattery = new Battery__c(
             Battery_PIN__c = 'BAT-INVALID-STATUS-001',
@@ -39,18 +34,15 @@ private class BatteryProductionValidationTest {
             Production_Request_ID__c = 'PR-INVALID-001',
             Status__c = 'Warehouse_Received'
         );
-
         insert invalidStatusBattery;
     }
 
-
     @IsTest
     static void testInvalidQrFormat() {
-
         BatteryInwardController.InwardSessionResponse session =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.startTest();
+        System.Test.startTest();
 
         BatteryInwardController.BatteryScanResponse response =
             BatteryInwardController.processBatteryInward(
@@ -58,7 +50,7 @@ private class BatteryProductionValidationTest {
                 session.sessionId
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             false,
@@ -79,14 +71,12 @@ private class BatteryProductionValidationTest {
         );
     }
 
-
     @IsTest
     static void testBatteryQrNotFound() {
-
         BatteryInwardController.InwardSessionResponse session =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.startTest();
+        System.Test.startTest();
 
         BatteryInwardController.BatteryScanResponse response =
             BatteryInwardController.processBatteryInward(
@@ -94,7 +84,7 @@ private class BatteryProductionValidationTest {
                 session.sessionId
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             false,
@@ -115,14 +105,12 @@ private class BatteryProductionValidationTest {
         );
     }
 
-
     @IsTest
     static void testBatteryLifecycleStatusValidation() {
-
         BatteryInwardController.InwardSessionResponse session =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.startTest();
+        System.Test.startTest();
 
         BatteryInwardController.BatteryScanResponse response =
             BatteryInwardController.processBatteryInward(
@@ -130,7 +118,7 @@ private class BatteryProductionValidationTest {
                 session.sessionId
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             false,
@@ -175,14 +163,12 @@ private class BatteryProductionValidationTest {
         );
     }
 
-
     @IsTest
     static void testValidProductionBatteryDetails() {
-
         BatteryInwardController.InwardSessionResponse session =
             BatteryInwardController.getOrCreateInwardSession();
 
-        Test.startTest();
+        System.Test.startTest();
 
         BatteryInwardController.BatteryScanResponse response =
             BatteryInwardController.processBatteryInward(
@@ -190,7 +176,7 @@ private class BatteryProductionValidationTest {
                 session.sessionId
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             true,
@@ -229,10 +215,8 @@ private class BatteryProductionValidationTest {
         );
     }
 
-
     @IsTest
     static void testDuplicateBatteryScan() {
-
         BatteryInwardController.InwardSessionResponse session =
             BatteryInwardController.getOrCreateInwardSession();
 
@@ -257,7 +241,6 @@ private class BatteryProductionValidationTest {
             LIMIT 1
         ];
 
-
         Battery_Inward__c existingInward = new Battery_Inward__c(
             Battery__c = battery.Id,
             Scanned_QR__c = battery.QR_Code__c,
@@ -270,8 +253,7 @@ private class BatteryProductionValidationTest {
 
         insert existingInward;
 
-
-        Test.startTest();
+        System.Test.startTest();
 
         BatteryInwardController.BatteryScanResponse response =
             BatteryInwardController.processBatteryInward(
@@ -279,7 +261,7 @@ private class BatteryProductionValidationTest {
                 session.sessionId
             );
 
-        Test.stopTest();
+        System.Test.stopTest();
 
         System.assertEquals(
             false,
